@@ -3,7 +3,7 @@
     {
       "kty": "RSA",
       "use": "sig",
-      "kid": "172f5ab0-f31f-4618-830d-c2bec5af3213",
+      "kid": "pentesterlab",
       "n": "2GQyseLgU1aS24438WBEXc9N6mSPWoHwl7naSBERvfVvjwJZ2DByAqfIQAq-8ZZNCG2yyEz3ocPlsNnWlGorscszN8OzaoJq6DKlMjmXvGt4zNrZl8dhiNXnkrSPDwH9WFnM5Wf8YIADW1w9LEub2Vw--PukUAk0547Ud4L08FPkddXp9_k7sSFtRDbT8clqoJvMBd5uMU1nu9IxKvbctB-FZ51WYTl_3fbGjQXmoBgayNORWSYaKiwRm4cn7ns_YvlRmDa3BN2k8G3ERhEpY7jOAergWo-vvTNUOqUXAGR4q0t50s4N4XTNVIoEAJpQOJMbzLGKcbAUtb9Ue-6pHw",
       "e": "AQAB",
       "alg": "RS256"
