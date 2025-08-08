@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="file:///etc/passwd">
+  </head>
+  <body>
+    <h1>SSRF Test</h1>
+  </body>
+</html>
