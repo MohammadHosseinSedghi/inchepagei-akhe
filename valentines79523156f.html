@@ -452,6 +452,13 @@
       position:relative;
       overflow:hidden;
     }
+  .paper .photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius: 18px;
+    display:block;
+  }  
 
     .paper .ctaRow{
       display:flex;
@@ -580,10 +587,9 @@
           </div>
         </div>
 
-        <div class="col">
-          <div class="photo" id="paperPhoto" title="Add your photo here if you want">
-            💞
-          </div>
+        <div class="photo" id="paperPhoto" title="Us">
+          <img src="assets/we.jpg" alt="ye aks az man o to" />
+        </div>
 
           <div class="box">
             <h3>Classifieds</h3>
@@ -607,45 +613,45 @@
 
   <script>
     // Customize
-    const herName = "my love";
-    const yourName = "Me";
+    const herName = "Fariba";
+    const yourName = "MohammadHossein";
     const dayLabel = "Valentine’s Day";
 
     const hoverNotes = [
-      "Your smile fixes my whole day",
-      "You’re my favorite place",
-      "I love your laugh so much",
-      "You make everything softer",
-      "You’re magic in human form",
+      "You are the song i want to listen every day.",
+      "You are the girl i want to love every day.",
+      "I love your smile so much.",
+      "I feel calmer with you.",
+      "You’re fairy in human form",
       "I’d choose you every time",
-      "You’re my calm and my fun",
-      "You + me = my best idea",
-      "I adore you. Like, a lot",
-      "You’re the prettiest plot twist",
+      "You’re my best friend.",
+      "Everything is fun with you.",
+      "I love the way you dress.",
+      "You have the most beautiful eyes",
       "I feel home with you",
-      "You make my heart do flips"
+      "You make my heart skip beats."
     ];
 
     const shyLines = [
-      "Not today, cute danger",
+      "Calm down cutie.",
       "Too slow, sweetheart",
-      "Nope button says: kiss me instead",
-      "Try again, I’m blushing",
-      "Your hand slipped... into my heart",
-      "I’m hiding behind a hug",
-      "You can’t no me, I’m adorable",
-      "Catch me if you can",
-      "I only accept yes",
-      "Ok ok you win... I vanish"
+      "You are making me sad",
+      "Pleaseeeee....",
+      "Oh god make her accept",
+      "Abolfazl, make her accept",
+      "So what you want to play this game?",
+      "Let's play then",
+      "I give you one more chance to accept",
+      "No more chances im done, accept now."
     ];
 
     const newspaperReasons = [
-      "Exclusive: Your smile is illegal (too cute)",
-      "Breaking: I miss you even when you’re here",
-      "Update: Your laugh is my favorite song",
-      "Confirmed: You make everything better",
-      "Alert: You are my safest place",
-      "Final report: I choose you, always"
+      "Exclusive: I chose you in our first date.",
+      "Breaking: I knew you were the ONE",
+      "Update: You became my whole life",
+      "Confirmed: Life is better with you",
+      "Alert: We are going to stay together forever ",
+      "Final report: LOVE YOU SO MUCH"
     ];
 
     const finalCopy = `The Cupid Post\nHeadline: She said YES\nBy: ${yourName}\nTo: ${herName}`;
