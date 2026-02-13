@@ -479,8 +479,7 @@
 
       <h1 id="title">Will you be my Valentine?</h1>
       <p class="sub" id="subtitle">
-        Hover the little tiles to uncover sweet notes.
-        Try the shy button too if you can catch it.
+        click on emojis to find secrets.
       </p>
 
       <div class="hint">
@@ -496,12 +495,12 @@
       </div>
 
       <div class="actions">
-        <button class="btn yes" id="yesBtn">Yes, my heart says so</button>
-        <button class="btn maybe" id="noBtn">Nope</button>
+        <button class="btn yes" id="yesBtn">Are baba Maloome</button>
+        <button class="btn maybe" id="noBtn">Na</button>
       </div>
 
       <div class="footer" id="footer">
-        P.S. The “Nope” button is allergic to negativity.
+        
       </div>
     </main>
   </div>
@@ -523,7 +522,7 @@
           <div>
             <h2 id="letterTitle">To my love 💌</h2>
             <div style="font-size:13px;opacity:.72;margin-top:6px" id="letterMini">
-              A little note, just for you
+              Here is your invitation.
             </div>
           </div>
 
@@ -585,16 +584,11 @@
     const letterMessage = (name) => (
 `Dear ${name},
 
-I adored you from the very beginning.
-Quietly at first.
-Not loudly. Not dramatically.
-Just deeply.
-
-And today, I still choose you.
-Every time.
-
-Love,
-${yourName}`
+You are invited to special valentines day.
+Shanbe Shab, saat 9:
+1. Making dinner together
+2. Watch movie together.
+3. and talk a lot.
     );
 
     const titleEl = document.getElementById("title");
@@ -707,24 +701,29 @@ ${yourName}`
     let dodges = 0;
     let noCooldown = false;
 
-    function moveNoButton(){
-      const card = document.getElementById("card").getBoundingClientRect();
-      const btn = noBtn.getBoundingClientRect();
+function moveNoButton(){
+  const cardEl = document.getElementById("card");
+  const card = cardEl.getBoundingClientRect();
+  const btn = noBtn.getBoundingClientRect();
 
-      const pad = 14;
-      const minX = card.left + pad;
-      const maxX = card.right - btn.width - pad;
-      const minY = card.top + 140;
-      const maxY = card.bottom - btn.height - 24;
+  const pad = 14;
 
-      const x = Math.max(minX, Math.min(maxX, (Math.random() * (maxX - minX)) + minX));
-      const y = Math.max(minY, Math.min(maxY, (Math.random() * (maxY - minY)) + minY));
+  // Allowed area INSIDE the card (relative coordinates)
+  const minX = pad;
+  const maxX = Math.max(pad, card.width - btn.width - pad);
 
-      noBtn.style.position = "fixed";
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-      noBtn.style.zIndex = 9;
-    }
+  const minY = 150; // keep it below the title area
+  const maxY = Math.max(minY, card.height - btn.height - 24);
+
+  const x = Math.floor(minX + Math.random() * (maxX - minX));
+  const y = Math.floor(minY + Math.random() * (maxY - minY));
+
+  // Keep it inside the card
+  noBtn.style.position = "absolute";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noBtn.style.zIndex = 9;
+}
 
     function vanishNoButton(){
       sparkle(noBtn);
@@ -757,15 +756,16 @@ ${yourName}`
       }
     }
 
-    noBtn.addEventListener("pointerenter", (e) => {
-      e.preventDefault();
-      handleNoAttempt();
-    });
+ noBtn.addEventListener("pointerenter", (e) => {
+  e.preventDefault();
+  handleNoAttempt();
+});
 
-    noBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      handleNoAttempt();
-    });
+noBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  handleNoAttempt();
+});
+
 
     // YES opens letter
     yesBtn.addEventListener("click", () => {
