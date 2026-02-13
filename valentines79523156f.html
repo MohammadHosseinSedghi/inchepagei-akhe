@@ -14,7 +14,6 @@
       --bg2:#ee9ca7;
       --bg3:#f7c9ff;
       --ink:#231f2e;
-      --soft:#ffffffcc;
       --glass:#ffffffb3;
       --accent:#ff3d7f;
       --accent2:#7c3aed;
@@ -52,9 +51,9 @@
     }
 
     .card{
-      width:min(720px, 92vw);
+      width:min(760px, 92vw);
       border-radius:28px;
-      background: linear-gradient(180deg, var(--glass), rgba(255,255,255,.6));
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.62));
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: var(--shadow);
@@ -68,10 +67,10 @@
     .glow{
       position:absolute; inset:-80px;
       background:
-        radial-gradient(500px 280px at 20% 10%, rgba(255,61,127,.28), transparent 60%),
-        radial-gradient(520px 300px at 80% 80%, rgba(124,58,237,.22), transparent 62%);
+        radial-gradient(520px 300px at 20% 10%, rgba(255,61,127,.30), transparent 62%),
+        radial-gradient(560px 340px at 80% 80%, rgba(124,58,237,.24), transparent 64%);
       filter: blur(10px);
-      opacity:.9;
+      opacity:.95;
       pointer-events:none;
     }
 
@@ -83,6 +82,7 @@
       margin-bottom:18px;
       position:relative;
       z-index:2;
+      flex-wrap:wrap;
     }
 
     .badge{
@@ -91,8 +91,8 @@
       gap:10px;
       padding:10px 14px;
       border-radius:999px;
-      background: rgba(255,255,255,.75);
-      border:1px solid rgba(255,255,255,.85);
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.9);
       box-shadow: 0 10px 24px rgba(10, 10, 30, .08);
       font-weight:600;
       font-size:14px;
@@ -106,7 +106,7 @@
 
     h1{
       font-family: "Playfair Display", serif;
-      font-size: clamp(34px, 4.6vw, 52px);
+      font-size: clamp(34px, 4.6vw, 54px);
       line-height:1.05;
       margin: 12px 0 10px;
       letter-spacing:-.02em;
@@ -116,8 +116,8 @@
 
     .sub{
       font-size:16px;
-      line-height:1.5;
-      opacity:.88;
+      line-height:1.55;
+      opacity:.9;
       margin: 0 0 18px;
       position:relative;
       z-index:2;
@@ -129,17 +129,17 @@
       gap:10px;
       padding:10px 12px;
       border-radius:14px;
-      background: rgba(255,255,255,.62);
-      border: 1px solid rgba(255,255,255,.8);
+      background: rgba(255,255,255,.66);
+      border: 1px solid rgba(255,255,255,.86);
       font-size:14px;
-      opacity:.92;
+      opacity:.95;
       position:relative;
       z-index:2;
     }
 
     .hint kbd{
       font-family: inherit;
-      font-weight:600;
+      font-weight:700;
       background: rgba(255,61,127,.12);
       border: 1px solid rgba(255,61,127,.22);
       padding: 2px 8px;
@@ -147,7 +147,7 @@
     }
 
     .actions{
-      margin-top: 24px;
+      margin-top: 22px;
       display:flex;
       gap:14px;
       flex-wrap:wrap;
@@ -160,12 +160,13 @@
       border:0;
       padding: 14px 18px;
       border-radius: 999px;
-      font-weight:700;
+      font-weight:800;
       font-size:16px;
       cursor:pointer;
-      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease, opacity .2s ease;
       user-select:none;
       position:relative;
+      will-change: transform;
     }
 
     .btn:active{ transform: translateY(1px) scale(.99); }
@@ -179,14 +180,25 @@
 
     .maybe{
       color: var(--ink);
-      background: rgba(255,255,255,.75);
-      border: 1px solid rgba(255,255,255,.9);
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(255,255,255,.95);
       box-shadow: 0 16px 30px rgba(10,10,30,.10);
     }
     .maybe:hover{ transform: translateY(-1px); }
 
+    .shake{
+      animation: shake .28s ease both;
+    }
+    @keyframes shake{
+      0%{ transform: translateX(0) }
+      25%{ transform: translateX(3px) }
+      50%{ transform: translateX(-3px) }
+      75%{ transform: translateX(2px) }
+      100%{ transform: translateX(0) }
+    }
+
     .lovebar{
-      margin-top: 22px;
+      margin-top: 18px;
       height: 12px;
       border-radius: 999px;
       background: rgba(255,255,255,.55);
@@ -197,15 +209,15 @@
     }
     .fill{
       height:100%;
-      width: 12%;
+      width: 14%;
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(255,61,127,.9), rgba(124,58,237,.75));
+      background: linear-gradient(90deg, rgba(255,61,127,.92), rgba(124,58,237,.78));
       box-shadow: var(--ring);
       transition: width .4s ease;
     }
 
     .garden{
-      margin-top: 18px;
+      margin-top: 16px;
       display:grid;
       grid-template-columns: repeat(6, 1fr);
       gap:12px;
@@ -216,8 +228,8 @@
     .seed{
       aspect-ratio: 1 / 1;
       border-radius: 18px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(255,255,255,.8);
+      background: rgba(255,255,255,.58);
+      border: 1px solid rgba(255,255,255,.86);
       box-shadow: 0 12px 26px rgba(10,10,30,.08);
       display:grid;
       place-items:center;
@@ -230,12 +242,12 @@
 
     .seed:hover{
       transform: translateY(-3px);
-      background: rgba(255,255,255,.75);
+      background: rgba(255,255,255,.78);
     }
 
     .seed span{
       font-size: 18px;
-      opacity:.9;
+      opacity:.92;
       transition: transform .2s ease, opacity .2s ease;
     }
 
@@ -246,7 +258,7 @@
       place-items:center;
       padding:10px;
       text-align:center;
-      font-weight:700;
+      font-weight:800;
       font-size:13px;
       opacity:0;
       transform: translateY(8px);
@@ -259,14 +271,14 @@
       transform: translateY(0);
     }
     .seed:hover span{
-      opacity:.25;
+      opacity:.22;
       transform: scale(.96);
     }
 
     .footer{
-      margin-top: 18px;
+      margin-top: 16px;
       font-size: 13px;
-      opacity:.72;
+      opacity:.74;
       position:relative;
       z-index:2;
     }
@@ -280,13 +292,12 @@
       position:absolute;
       font-size: 18px;
       opacity:.55;
-      filter: blur(.1px);
       animation: drift linear infinite;
       transform: translateY(110vh);
     }
     @keyframes drift{
       from { transform: translateY(110vh) translateX(0) rotate(0deg); }
-      to   { transform: translateY(-20vh) translateX(40px) rotate(22deg); }
+      to   { transform: translateY(-20vh) translateX(45px) rotate(24deg); }
     }
 
     .toast{
@@ -296,8 +307,8 @@
       transform: translateX(-50%);
       padding: 12px 14px;
       border-radius: 16px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(255,255,255,.9);
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(255,255,255,.92);
       box-shadow: 0 18px 40px rgba(10,10,30,.16);
       display:flex;
       align-items:center;
@@ -329,10 +340,10 @@
       pointer-events:auto;
     }
     .modal .box{
-      width:min(640px, 92vw);
+      width:min(660px, 92vw);
       border-radius: 26px;
-      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
-      border: 1px solid rgba(255,255,255,.9);
+      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.74));
+      border: 1px solid rgba(255,255,255,.92);
       box-shadow: 0 28px 80px rgba(10,10,30,.22);
       padding: 26px 22px;
       position:relative;
@@ -348,7 +359,7 @@
       margin:0;
       font-size: 15.5px;
       line-height:1.55;
-      opacity:.9;
+      opacity:.92;
     }
     .modal .row{
       display:flex;
@@ -358,7 +369,7 @@
     }
     .tiny{
       font-size: 13px;
-      opacity: .7;
+      opacity: .72;
       margin-top: 12px;
     }
     .x{
@@ -368,10 +379,10 @@
       width: 40px;
       height: 40px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.9);
-      background: rgba(255,255,255,.7);
+      border: 1px solid rgba(255,255,255,.92);
+      background: rgba(255,255,255,.76);
       cursor:pointer;
-      font-weight:800;
+      font-weight:900;
     }
 
     .confetti{
@@ -385,11 +396,11 @@
       position:absolute;
       width:10px; height:14px;
       border-radius: 3px;
-      opacity:.9;
+      opacity:.92;
       animation: fall linear forwards;
     }
     @keyframes fall{
-      to { transform: translateY(110vh) rotate(560deg); opacity:.95; }
+      to { transform: translateY(110vh) rotate(560deg); opacity:.98; }
     }
 
     @media (max-width: 520px){
@@ -410,7 +421,7 @@
       <div class="top">
         <div class="badge">
           <span class="dot"></span>
-          <span id="badgeText">Hover to reveal sweet little secrets</span>
+          <span id="badgeText">Hover to reveal tiny love spells</span>
         </div>
         <div class="badge" title="Made with love">
           <span>♡</span>
@@ -420,8 +431,8 @@
 
       <h1 id="title">Will you be my Valentine?</h1>
       <p class="sub" id="subtitle">
-        Move your mouse around, hover the tiny hearts, and watch the magic happen.
-        I hid a few reasons I’m crazy about you.
+        Hover the little tiles to uncover sweet notes.
+        Try the shy button too... if you can catch it.
       </p>
 
       <div class="hint">
@@ -437,18 +448,18 @@
       </div>
 
       <div class="actions">
-        <button class="btn yes" id="yesBtn">Yes, obviously</button>
-        <button class="btn maybe" id="noBtn">Hmm…</button>
+        <button class="btn yes" id="yesBtn">Yes, my heart says so</button>
+        <button class="btn maybe" id="noBtn">Nope</button>
       </div>
 
       <div class="footer" id="footer">
-        P.S. Try to catch the “Hmm…” button. It’s shy.
+        P.S. The “Nope” button is allergic to negativity.
       </div>
     </main>
   </div>
 
   <div class="toast" id="toast">
-    <span>💗</span>
+    <span id="toastIcon">💗</span>
     <span id="toastText">You found a secret.</span>
   </div>
 
@@ -457,15 +468,16 @@
       <button class="x" id="closeModal" aria-label="Close">✕</button>
       <h2 id="modalTitle">YAY! It’s a date 💞</h2>
       <p id="modalBody">
-        I’m officially the luckiest person alive.
-        I’ll pick you up, bring your favorite treat, and make this day all about us.
+        You just made my whole universe blush.
+        I’ll bring your favorite treat, steal a thousand smiles, and make the day feel like a warm hug.
       </p>
       <div class="row">
         <button class="btn yes" id="confettiAgain">More confetti</button>
         <button class="btn maybe" id="copyMsg">Copy cute message</button>
+        <button class="btn maybe" id="kissBtn">Send a kiss</button>
       </div>
       <div class="tiny" id="tinyLine">
-        You can customize all the text in the top of the file in the “Customize” section.
+        Edit names and messages inside the “Customize” section in the script.
       </div>
     </div>
   </div>
@@ -491,6 +503,19 @@
       "You make my heart do flips"
     ];
 
+    const shyLines = [
+      "Not today, cute danger",
+      "Too slow, sweetheart",
+      "Nope button says: kiss me instead",
+      "Try again, I’m blushing",
+      "Your hand slipped... into my heart",
+      "I’m hiding behind a hug",
+      "You can’t no me, I’m adorable",
+      "Catch me if you can",
+      "I only accept yes",
+      "Ok ok you win... I vanish"
+    ];
+
     const finalMessage = `Dear ${herName},\nWill you be my Valentine?\nLove, ${yourName}`;
 
     const titleEl = document.getElementById("title");
@@ -500,24 +525,26 @@
     const fill = document.getElementById("fill");
     const toast = document.getElementById("toast");
     const toastText = document.getElementById("toastText");
+    const toastIcon = document.getElementById("toastIcon");
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
     const modal = document.getElementById("modal");
     const closeModal = document.getElementById("closeModal");
     const confettiAgain = document.getElementById("confettiAgain");
     const copyMsg = document.getElementById("copyMsg");
+    const kissBtn = document.getElementById("kissBtn");
     const confettiLayer = document.getElementById("confetti");
     const floaters = document.getElementById("floaters");
 
     dateText.textContent = dayLabel;
     titleEl.textContent = "Will you be my Valentine?";
 
-    // Build hover garden
     const icons = ["💗","✨","🌸","💖","🌙","🫶"];
     let found = new Set();
-    let love = 12;
+    let love = 14;
 
-    function showToast(msg){
+    function showToast(msg, icon="💗"){
+      toastIcon.textContent = icon;
       toastText.textContent = msg;
       toast.classList.add("show");
       clearTimeout(showToast.t);
@@ -527,9 +554,9 @@
     function updateLove(){
       const pct = Math.min(100, love);
       fill.style.width = pct + "%";
-      if (pct >= 85) badgeText.textContent = "Ok wow. That’s a lot of love.";
-      else if (pct >= 55) badgeText.textContent = "Keep hovering… you’re unlocking the cutest stuff.";
-      else badgeText.textContent = "Hover to reveal sweet little secrets";
+      if (pct >= 90) badgeText.textContent = "My heart is doing cartwheels";
+      else if (pct >= 60) badgeText.textContent = "Keep going... you’re making me melt";
+      else badgeText.textContent = "Hover to reveal tiny love spells";
     }
 
     function makeTile(i){
@@ -550,11 +577,18 @@
       tile.addEventListener("mouseenter", () => {
         if (!found.has(i)){
           found.add(i);
-          love += 6;
+          love += 7;
           updateLove();
-          showToast(note.textContent);
+          showToast(note.textContent, "✨");
           sparkle(tile);
+          confettiBurst(18);
         }
+      });
+
+      tile.addEventListener("click", () => {
+        sparkle(tile);
+        showToast("You tapped a love note", "💖");
+        confettiBurst(22);
       });
 
       return tile;
@@ -563,7 +597,7 @@
     for (let i=0; i<12; i++) garden.appendChild(makeTile(i));
     updateLove();
 
-    // Floating background hearts
+    // Floating background hearts and sparkles
     function spawnFloater(){
       const el = document.createElement("div");
       el.className = "floater";
@@ -579,10 +613,13 @@
       floaters.appendChild(el);
       setTimeout(() => el.remove(), duration * 1000);
     }
-    for (let i=0; i<18; i++) setTimeout(spawnFloater, i*350);
-    setInterval(spawnFloater, 700);
+    for (let i=0; i<20; i++) setTimeout(spawnFloater, i*320);
+    setInterval(spawnFloater, 650);
 
-    // Button that playfully dodges
+    // Shy NO button
+    const maxDodges = 10;
+    let dodges = 0;
+
     function moveNoButton(){
       const card = document.getElementById("card").getBoundingClientRect();
       const btn = noBtn.getBoundingClientRect();
@@ -600,24 +637,49 @@
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
       noBtn.style.zIndex = 9;
+      noBtn.classList.remove("shake");
+      void noBtn.offsetWidth;
+      noBtn.classList.add("shake");
     }
 
-    let dodges = 0;
-    noBtn.addEventListener("mouseenter", () => {
-      dodges++;
-      love += 2;
-      updateLove();
-      if (dodges < 12) moveNoButton();
-      else {
-        noBtn.textContent = "Okay okay… yes";
-        noBtn.classList.add("yes");
-        noBtn.classList.remove("maybe");
-      }
-    });
+    function vanishNoButton(){
+      sparkle(noBtn);
+      confettiBurst(90);
+      showToast("No button ran away... only yes remains", "💞");
+      noBtn.style.pointerEvents = "none";
+      noBtn.style.opacity = "0";
+      noBtn.style.transform = "scale(0.92)";
+      setTimeout(() => {
+        noBtn.style.display = "none";
+        badgeText.textContent = "Alright... destiny picked YES";
+      }, 220);
+    }
 
-    noBtn.addEventListener("click", () => {
-      // After enough dodges, it turns into a yes anyway
-      openModal();
+    function handleNoAttempt(){
+      dodges++;
+      love += 3;
+      updateLove();
+
+      const idx = Math.min(dodges - 1, shyLines.length - 1);
+      showToast(shyLines[idx], "🫶");
+      sparkle(document.getElementById("card"));
+
+      if (dodges <= maxDodges){
+        moveNoButton();
+        if (dodges === maxDodges){
+          setTimeout(vanishNoButton, 320);
+        }
+      }
+    }
+
+    noBtn.addEventListener("mouseenter", handleNoAttempt);
+    noBtn.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      handleNoAttempt();
+    });
+    noBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      handleNoAttempt();
     });
 
     // YES flow
@@ -630,8 +692,9 @@
     function openModal(){
       modal.classList.add("show");
       modal.setAttribute("aria-hidden","false");
-      confettiBurst(160);
+      confettiBurst(180);
       sparkle(document.getElementById("card"));
+      showToast("You just made me the happiest", "💗");
     }
 
     closeModal.addEventListener("click", () => {
@@ -643,39 +706,46 @@
       if (e.target === modal) closeModal.click();
     });
 
-    confettiAgain.addEventListener("click", () => confettiBurst(120));
+    confettiAgain.addEventListener("click", () => confettiBurst(140));
 
     copyMsg.addEventListener("click", async () => {
       try{
         await navigator.clipboard.writeText(finalMessage);
-        showToast("Copied. Send it or keep it as a cute keepsake.");
+        showToast("Copied. Send it with a big smile", "✨");
+        confettiBurst(60);
       }catch{
-        showToast("Copy blocked. You can still screenshot it.");
+        showToast("Copy blocked. Screenshot works too", "🌸");
       }
+    });
+
+    kissBtn.addEventListener("click", () => {
+      confettiBurst(80);
+      showToast("Mwah", "😘");
+      sparkle(document.getElementById("card"));
     });
 
     // Sparkle effect
     function sparkle(target){
       const r = target.getBoundingClientRect();
-      for (let i=0; i<10; i++){
+      for (let i=0; i<12; i++){
         const s = document.createElement("div");
         s.textContent = Math.random() > 0.5 ? "✨" : "💗";
         s.style.position = "fixed";
-        s.style.left = (r.left + r.width*0.2 + Math.random()*r.width*0.6) + "px";
-        s.style.top = (r.top + r.height*0.2 + Math.random()*r.height*0.6) + "px";
-        s.style.fontSize = (12 + Math.random()*16) + "px";
-        s.style.opacity = "0.95";
+        s.style.left = (r.left + r.width*0.15 + Math.random()*r.width*0.7) + "px";
+        s.style.top = (r.top + r.height*0.15 + Math.random()*r.height*0.7) + "px";
+        s.style.fontSize = (12 + Math.random()*18) + "px";
+        s.style.opacity = "0.96";
         s.style.pointerEvents = "none";
         s.style.zIndex = 25;
         s.style.transition = "transform .7s ease, opacity .7s ease";
         document.body.appendChild(s);
 
         requestAnimationFrame(() => {
-          s.style.transform = "translateY(-18px) scale(0.9)";
+          s.style.transform = "translateY(-20px) scale(0.9)";
           s.style.opacity = "0";
         });
 
-        setTimeout(() => s.remove(), 720);
+        setTimeout(() => s.remove(), 740);
       }
     }
 
@@ -696,7 +766,7 @@
         p.style.top = (-10 - Math.random()*20) + "vh";
         p.style.background = colors[Math.floor(Math.random()*colors.length)];
         p.style.transform = "translateY(0) rotate(" + (Math.random()*360) + "deg)";
-        p.style.animationDuration = (2.8 + Math.random()*2.2) + "s";
+        p.style.animationDuration = (2.7 + Math.random()*2.3) + "s";
         p.style.animationDelay = (Math.random()*0.25) + "s";
         p.style.width = (8 + Math.random()*10) + "px";
         p.style.height = (10 + Math.random()*16) + "px";
