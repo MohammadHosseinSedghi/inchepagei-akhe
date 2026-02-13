@@ -703,27 +703,38 @@ Shanbe Shab, saat 9:
 
 function moveNoButton(){
   const cardEl = document.getElementById("card");
-  const card = cardEl.getBoundingClientRect();
-  const btn = noBtn.getBoundingClientRect();
+  const actionsEl = document.querySelector(".actions");
+
+  const cardW = cardEl.clientWidth;
+  const cardH = cardEl.clientHeight;
+
+  const btnW = noBtn.offsetWidth;
+  const btnH = noBtn.offsetHeight;
 
   const pad = 14;
 
-  // Allowed area INSIDE the card (relative coordinates)
+  // X stays inside the card
   const minX = pad;
-  const maxX = Math.max(pad, card.width - btn.width - pad);
+  const maxX = Math.max(minX, cardW - btnW - pad);
 
-  const minY = 150; // keep it below the title area
-  const maxY = Math.max(minY, card.height - btn.height - 24);
+  // Y stays inside a small band around the actions section (so it never goes into the emoji grid)
+  const actionsTop = actionsEl.offsetTop;          // relative to card
+  const bandTop = Math.max(actionsTop - 10, pad);  // little above actions
+  const bandBottom = Math.min(actionsTop + 60, cardH - btnH - pad); // little below actions
+
+  const minY = bandTop;
+  const maxY = Math.max(minY, bandBottom);
 
   const x = Math.floor(minX + Math.random() * (maxX - minX));
   const y = Math.floor(minY + Math.random() * (maxY - minY));
 
-  // Keep it inside the card
+  // Keep it positioned relative to the card
   noBtn.style.position = "absolute";
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
   noBtn.style.zIndex = 9;
 }
+
 
     function vanishNoButton(){
       sparkle(noBtn);
