@@ -759,54 +759,75 @@
     setInterval(spawnFloater, 650);
 
     // Shy NO button (10 moves then disappears)
-    const maxDodges = 10;
-    let dodges = 0;
+// Shy NO button (10 moves then disappears)
+const maxDodges = 10;
+let dodges = 0;
 
-    function moveNoButton(){
-      const card = document.getElementById("card").getBoundingClientRect();
-      const btn = noBtn.getBoundingClientRect();
+// cooldown so one attempt counts once
+let noCooldown = false;
 
-      const pad = 14;
-      const minX = card.left + pad;
-      const maxX = card.right - btn.width - pad;
-      const minY = card.top + 140;
-      const maxY = card.bottom - btn.height - 24;
+function moveNoButton(){
+  const card = document.getElementById("card").getBoundingClientRect();
+  const btn = noBtn.getBoundingClientRect();
 
-      const x = Math.max(minX, Math.min(maxX, (Math.random() * (maxX - minX)) + minX));
-      const y = Math.max(minY, Math.min(maxY, (Math.random() * (maxY - minY)) + minY));
+  const pad = 14;
+  const minX = card.left + pad;
+  const maxX = card.right - btn.width - pad;
+  const minY = card.top + 140;
+  const maxY = card.bottom - btn.height - 24;
 
-      noBtn.style.position = "fixed";
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-      noBtn.style.zIndex = 9;
-    }
+  const x = Math.max(minX, Math.min(maxX, (Math.random() * (maxX - minX)) + minX));
+  const y = Math.max(minY, Math.min(maxY, (Math.random() * (maxY - minY)) + minY));
 
-    function vanishNoButton(){
-      sparkle(noBtn);
-      confettiBurst(90);
-      showToast("No button ran away... only yes remains", "💞");
-      noBtn.style.pointerEvents = "none";
-      noBtn.style.opacity = "0";
-      noBtn.style.transform = "scale(0.92)";
-      setTimeout(() => { noBtn.style.display = "none"; }, 240);
-    }
+  noBtn.style.position = "fixed";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noBtn.style.zIndex = 9;
+}
 
-    function handleNoAttempt(){
-      dodges++;
-      love += 3;
-      updateLove();
-      showToast(shyLines[Math.min(dodges - 1, shyLines.length - 1)], "🫶");
-      sparkle(document.getElementById("card"));
+function vanishNoButton(){
+  sparkle(noBtn);
+  confettiBurst(90);
+  showToast("No button ran away... only yes remains", "💞");
+  noBtn.style.pointerEvents = "none";
+  noBtn.style.opacity = "0";
+  noBtn.style.transform = "scale(0.92)";
+  setTimeout(() => { noBtn.style.display = "none"; }, 240);
+}
 
-      if (dodges <= maxDodges){
-        moveNoButton();
-        if (dodges === maxDodges) setTimeout(vanishNoButton, 320);
-      }
-    }
+function handleNoAttempt(){
+  if (noCooldown) return;
+  noCooldown = true;
+  setTimeout(() => (noCooldown = false), 220);
 
-    noBtn.addEventListener("mouseenter", handleNoAttempt);
-    noBtn.addEventListener("pointerdown", (e) => { e.preventDefault(); handleNoAttempt(); });
-    noBtn.addEventListener("click", (e) => { e.preventDefault(); handleNoAttempt(); });
+  dodges++;
+  love += 3;
+  updateLove();
+
+  showToast(shyLines[Math.min(dodges - 1, shyLines.length - 1)], "🫶");
+  sparkle(document.getElementById("card"));
+
+  if (dodges < maxDodges){
+    // prevent instant re-trigger when it jumps under the cursor
+    noBtn.style.pointerEvents = "none";
+    moveNoButton();
+    setTimeout(() => (noBtn.style.pointerEvents = "auto"), 140);
+  } else {
+    setTimeout(vanishNoButton, 260);
+  }
+}
+
+// Only ONE trigger (hover), no click/pointerdown duplicates
+noBtn.addEventListener("pointerenter", (e) => {
+  e.preventDefault();
+  handleNoAttempt();
+});
+
+// Optional: if she tries to tap it on mobile
+noBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  handleNoAttempt();
+});
 
     // YES -> show Newspaper
     yesBtn.addEventListener("click", () => {
