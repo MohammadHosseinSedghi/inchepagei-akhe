@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Will you be my Valentine?</title>
+  <title>Valentine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -168,7 +168,6 @@
       position:relative;
       will-change: transform;
     }
-
     .btn:active{ transform: translateY(1px) scale(.99); }
 
     .yes{
@@ -183,18 +182,6 @@
       background: rgba(255,255,255,.80);
       border: 1px solid rgba(255,255,255,.95);
       box-shadow: 0 16px 30px rgba(10,10,30,.10);
-    }
-    .maybe:hover{ transform: translateY(-1px); }
-
-    .shake{
-      animation: shake .28s ease both;
-    }
-    @keyframes shake{
-      0%{ transform: translateX(0) }
-      25%{ transform: translateX(3px) }
-      50%{ transform: translateX(-3px) }
-      75%{ transform: translateX(2px) }
-      100%{ transform: translateX(0) }
     }
 
     .lovebar{
@@ -239,11 +226,7 @@
       transform: translateZ(0);
       transition: transform .18s ease, background .18s ease;
     }
-
-    .seed:hover{
-      transform: translateY(-3px);
-      background: rgba(255,255,255,.78);
-    }
+    .seed:hover{ transform: translateY(-3px); background: rgba(255,255,255,.78); }
 
     .seed span{
       font-size: 18px;
@@ -265,15 +248,8 @@
       transition: opacity .2s ease, transform .2s ease;
       color: rgba(35, 31, 46, .92);
     }
-
-    .seed:hover .note{
-      opacity:1;
-      transform: translateY(0);
-    }
-    .seed:hover span{
-      opacity:.22;
-      transform: scale(.96);
-    }
+    .seed:hover .note{ opacity:1; transform: translateY(0); }
+    .seed:hover span{ opacity:.22; transform: scale(.96); }
 
     .footer{
       margin-top: 16px;
@@ -323,68 +299,6 @@
       transform: translateX(-50%) translateY(-6px);
     }
 
-    .modal{
-      position:fixed;
-      inset:0;
-      display:grid;
-      place-items:center;
-      background: rgba(20, 10, 30, .20);
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .25s ease;
-      z-index:20;
-      padding: 24px;
-    }
-    .modal.show{
-      opacity:1;
-      pointer-events:auto;
-    }
-    .modal .box{
-      width:min(660px, 92vw);
-      border-radius: 26px;
-      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.74));
-      border: 1px solid rgba(255,255,255,.92);
-      box-shadow: 0 28px 80px rgba(10,10,30,.22);
-      padding: 26px 22px;
-      position:relative;
-      overflow:hidden;
-    }
-    .modal h2{
-      font-family:"Playfair Display", serif;
-      margin: 4px 0 10px;
-      font-size: clamp(26px, 3.6vw, 38px);
-      line-height:1.1;
-    }
-    .modal p{
-      margin:0;
-      font-size: 15.5px;
-      line-height:1.55;
-      opacity:.92;
-    }
-    .modal .row{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top: 18px;
-    }
-    .tiny{
-      font-size: 13px;
-      opacity: .72;
-      margin-top: 12px;
-    }
-    .x{
-      position:absolute;
-      top: 12px;
-      right: 12px;
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.92);
-      background: rgba(255,255,255,.76);
-      cursor:pointer;
-      font-weight:900;
-    }
-
     .confetti{
       position:fixed;
       inset:0;
@@ -401,6 +315,167 @@
     }
     @keyframes fall{
       to { transform: translateY(110vh) rotate(560deg); opacity:.98; }
+    }
+
+    /* NEWSPAPER OVERLAY */
+    .paper{
+      position:fixed;
+      inset:0;
+      display:grid;
+      place-items:center;
+      padding:24px;
+      background: rgba(20,10,30,.22);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .25s ease;
+      z-index:40;
+    }
+    .paper.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .paper .sheet{
+      width:min(980px, 94vw);
+      max-height: min(86vh, 900px);
+      overflow:auto;
+      border-radius: 22px;
+      background: #fffaf6;
+      border: 1px solid rgba(35,31,46,.10);
+      box-shadow: 0 32px 90px rgba(10,10,30,.26);
+      padding: 22px 18px 18px;
+      position:relative;
+    }
+
+    .paper .masthead{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(35,31,46,.12);
+    }
+    .paper .name{
+      font-family: "Playfair Display", serif;
+      font-size: clamp(28px, 3.8vw, 44px);
+      letter-spacing: .02em;
+      margin:0;
+    }
+    .paper .meta{
+      text-align:right;
+      font-size: 12.5px;
+      opacity:.75;
+      line-height:1.35;
+    }
+
+    .paper .banner{
+      margin: 14px 0 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,61,127,.10);
+      border: 1px solid rgba(255,61,127,.20);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .paper .headline{
+      font-family:"Playfair Display", serif;
+      font-size: clamp(24px, 3.2vw, 36px);
+      margin: 0;
+      line-height:1.1;
+    }
+    .paper .kicker{
+      margin: 2px 0 0;
+      font-size: 14px;
+      opacity:.85;
+    }
+
+    .paper .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+    }
+
+    .paper .col{
+      display:grid;
+      gap:12px;
+    }
+
+    .paper .box{
+      border-radius: 18px;
+      background: rgba(35,31,46,.03);
+      border: 1px solid rgba(35,31,46,.08);
+      padding: 14px;
+    }
+
+    .paper h3{
+      margin:0 0 6px;
+      font-size: 14px;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      opacity:.75;
+    }
+    .paper p{
+      margin:0;
+      font-size: 14.5px;
+      line-height:1.55;
+      opacity:.92;
+    }
+
+    .paper .reasons{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:10px;
+      margin-top: 10px;
+    }
+    .paper .chip{
+      border-radius: 14px;
+      padding: 10px 10px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(35,31,46,.10);
+      font-weight:700;
+      font-size: 13px;
+    }
+
+    .paper .photo{
+      height: 170px;
+      border-radius: 18px;
+      background:
+        radial-gradient(400px 220px at 15% 30%, rgba(255,61,127,.22), transparent 62%),
+        radial-gradient(420px 240px at 85% 70%, rgba(124,58,237,.18), transparent 64%),
+        linear-gradient(135deg, rgba(255,255,255,.85), rgba(255,255,255,.55));
+      border: 1px solid rgba(35,31,46,.10);
+      display:grid;
+      place-items:center;
+      font-size: 44px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .paper .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+      align-items:center;
+    }
+    .paper .close{
+      position:absolute;
+      top: 12px;
+      right: 12px;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(35,31,46,.12);
+      background: rgba(255,255,255,.85);
+      cursor:pointer;
+      font-weight:900;
+    }
+
+    @media (max-width: 820px){
+      .paper .grid{ grid-template-columns: 1fr; }
+      .paper .reasons{ grid-template-columns: 1fr; }
     }
 
     @media (max-width: 520px){
@@ -423,7 +498,7 @@
           <span class="dot"></span>
           <span id="badgeText">Hover to reveal tiny love spells</span>
         </div>
-        <div class="badge" title="Made with love">
+        <div class="badge">
           <span>♡</span>
           <span id="dateText">Valentine’s Day</span>
         </div>
@@ -463,22 +538,70 @@
     <span id="toastText">You found a secret.</span>
   </div>
 
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="box">
-      <button class="x" id="closeModal" aria-label="Close">✕</button>
-      <h2 id="modalTitle">YAY! It’s a date 💞</h2>
-      <p id="modalBody">
-        You just made my whole universe blush.
-        I’ll bring your favorite treat, steal a thousand smiles, and make the day feel like a warm hug.
-      </p>
-      <div class="row">
-        <button class="btn yes" id="confettiAgain">More confetti</button>
-        <button class="btn maybe" id="copyMsg">Copy cute message</button>
-        <button class="btn maybe" id="kissBtn">Send a kiss</button>
+  <!-- NEWSPAPER (shows after YES) -->
+  <div class="paper" id="paper" aria-hidden="true">
+    <div class="sheet">
+      <button class="close" id="paperClose" aria-label="Close">✕</button>
+
+      <div class="masthead">
+        <h2 class="name" id="paperName">The Cupid Post</h2>
+        <div class="meta">
+          <div id="paperDate">Special Edition</div>
+          <div id="paperTag">Love, breaking news</div>
+        </div>
       </div>
-      <div class="tiny" id="tinyLine">
-        Edit names and messages inside the “Customize” section in the script.
+
+      <div class="banner">
+        <div>
+          <p class="headline" id="paperHeadline">She said YES</p>
+          <p class="kicker" id="paperKicker">Sources confirm: two cuties are officially a team</p>
+        </div>
+        <div class="ctaRow">
+          <button class="btn yes" id="paperConfetti">Celebrate</button>
+          <button class="btn maybe" id="paperCopy">Copy headline</button>
+        </div>
       </div>
+
+      <div class="grid">
+        <div class="col">
+          <div class="box">
+            <h3>Top Story</h3>
+            <p id="paperStory">
+              In a shocking turn of events, your smile caused a permanent rise in my heartbeat.
+              Experts say the only known cure is holding hands, laughing too much, and making memories together.
+            </p>
+
+            <div class="reasons" id="paperReasons"></div>
+          </div>
+
+          <div class="box">
+            <h3>Weather</h3>
+            <p id="paperWeather">Forecast: 100 percent chance of hugs, kisses, and happy giggles</p>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="photo" id="paperPhoto" title="Add your photo here if you want">
+            💞
+          </div>
+
+          <div class="box">
+            <h3>Classifieds</h3>
+            <p id="paperClassifieds">
+              Wanted: one Valentine to be adored daily.
+              Reward: unlimited affection and snacks.
+            </p>
+          </div>
+
+          <div class="box">
+            <h3>Next Date</h3>
+            <p id="paperNext">
+              Tonight: your favorite treat + a walk + a playlist made for you.
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -516,7 +639,16 @@
       "Ok ok you win... I vanish"
     ];
 
-    const finalMessage = `Dear ${herName},\nWill you be my Valentine?\nLove, ${yourName}`;
+    const newspaperReasons = [
+      "Exclusive: Your smile is illegal (too cute)",
+      "Breaking: I miss you even when you’re here",
+      "Update: Your laugh is my favorite song",
+      "Confirmed: You make everything better",
+      "Alert: You are my safest place",
+      "Final report: I choose you, always"
+    ];
+
+    const finalCopy = `The Cupid Post\nHeadline: She said YES\nBy: ${yourName}\nTo: ${herName}`;
 
     const titleEl = document.getElementById("title");
     const dateText = document.getElementById("dateText");
@@ -528,13 +660,18 @@
     const toastIcon = document.getElementById("toastIcon");
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
-    const modal = document.getElementById("modal");
-    const closeModal = document.getElementById("closeModal");
-    const confettiAgain = document.getElementById("confettiAgain");
-    const copyMsg = document.getElementById("copyMsg");
-    const kissBtn = document.getElementById("kissBtn");
     const confettiLayer = document.getElementById("confetti");
     const floaters = document.getElementById("floaters");
+
+    const paper = document.getElementById("paper");
+    const paperClose = document.getElementById("paperClose");
+    const paperConfetti = document.getElementById("paperConfetti");
+    const paperCopy = document.getElementById("paperCopy");
+    const paperHeadline = document.getElementById("paperHeadline");
+    const paperKicker = document.getElementById("paperKicker");
+    const paperStory = document.getElementById("paperStory");
+    const paperReasons = document.getElementById("paperReasons");
+    const paperDate = document.getElementById("paperDate");
 
     dateText.textContent = dayLabel;
     titleEl.textContent = "Will you be my Valentine?";
@@ -587,7 +724,7 @@
 
       tile.addEventListener("click", () => {
         sparkle(tile);
-        showToast("You tapped a love note", "💖");
+        showToast("Love note unlocked", "💖");
         confettiBurst(22);
       });
 
@@ -597,7 +734,6 @@
     for (let i=0; i<12; i++) garden.appendChild(makeTile(i));
     updateLove();
 
-    // Floating background hearts and sparkles
     function spawnFloater(){
       const el = document.createElement("div");
       el.className = "floater";
@@ -616,7 +752,7 @@
     for (let i=0; i<20; i++) setTimeout(spawnFloater, i*320);
     setInterval(spawnFloater, 650);
 
-    // Shy NO button
+    // Shy NO button (10 moves then disappears)
     const maxDodges = 10;
     let dodges = 0;
 
@@ -637,9 +773,6 @@
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
       noBtn.style.zIndex = 9;
-      noBtn.classList.remove("shake");
-      void noBtn.offsetWidth;
-      noBtn.classList.add("shake");
     }
 
     function vanishNoButton(){
@@ -649,82 +782,80 @@
       noBtn.style.pointerEvents = "none";
       noBtn.style.opacity = "0";
       noBtn.style.transform = "scale(0.92)";
-      setTimeout(() => {
-        noBtn.style.display = "none";
-        badgeText.textContent = "Alright... destiny picked YES";
-      }, 220);
+      setTimeout(() => { noBtn.style.display = "none"; }, 240);
     }
 
     function handleNoAttempt(){
       dodges++;
       love += 3;
       updateLove();
-
-      const idx = Math.min(dodges - 1, shyLines.length - 1);
-      showToast(shyLines[idx], "🫶");
+      showToast(shyLines[Math.min(dodges - 1, shyLines.length - 1)], "🫶");
       sparkle(document.getElementById("card"));
 
       if (dodges <= maxDodges){
         moveNoButton();
-        if (dodges === maxDodges){
-          setTimeout(vanishNoButton, 320);
-        }
+        if (dodges === maxDodges) setTimeout(vanishNoButton, 320);
       }
     }
 
     noBtn.addEventListener("mouseenter", handleNoAttempt);
-    noBtn.addEventListener("pointerdown", (e) => {
-      e.preventDefault();
-      handleNoAttempt();
-    });
-    noBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      handleNoAttempt();
-    });
+    noBtn.addEventListener("pointerdown", (e) => { e.preventDefault(); handleNoAttempt(); });
+    noBtn.addEventListener("click", (e) => { e.preventDefault(); handleNoAttempt(); });
 
-    // YES flow
+    // YES -> show Newspaper
     yesBtn.addEventListener("click", () => {
       love = 100;
       updateLove();
-      openModal();
+      openPaper();
     });
 
-    function openModal(){
-      modal.classList.add("show");
-      modal.setAttribute("aria-hidden","false");
+    function openPaper(){
+      // Fill newspaper with personalized bits
+      const d = new Date();
+      paperDate.textContent = d.toLocaleDateString(undefined, { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+      paperHeadline.textContent = `${herName} said YES`;
+      paperKicker.textContent = `Official: ${herName} and ${yourName} are the cutest headline this year`;
+      paperStory.textContent =
+        `Witnesses report a sudden increase in butterflies, smiles, and “I can’t stop thinking about you”.
+         The Cupid Post confirms: this love story is real, and it’s adorable.`;
+
+      paperReasons.innerHTML = "";
+      newspaperReasons.forEach(r => {
+        const chip = document.createElement("div");
+        chip.className = "chip";
+        chip.textContent = r;
+        paperReasons.appendChild(chip);
+      });
+
+      paper.classList.add("show");
+      paper.setAttribute("aria-hidden","false");
       confettiBurst(180);
       sparkle(document.getElementById("card"));
-      showToast("You just made me the happiest", "💗");
+      showToast("Front page moment", "✨");
     }
 
-    closeModal.addEventListener("click", () => {
-      modal.classList.remove("show");
-      modal.setAttribute("aria-hidden","true");
+    paperClose.addEventListener("click", () => {
+      paper.classList.remove("show");
+      paper.setAttribute("aria-hidden","true");
     });
 
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal.click();
+    paper.addEventListener("click", (e) => {
+      if (e.target === paper) paperClose.click();
     });
 
-    confettiAgain.addEventListener("click", () => confettiBurst(140));
+    paperConfetti.addEventListener("click", () => confettiBurst(160));
 
-    copyMsg.addEventListener("click", async () => {
+    paperCopy.addEventListener("click", async () => {
       try{
-        await navigator.clipboard.writeText(finalMessage);
-        showToast("Copied. Send it with a big smile", "✨");
+        await navigator.clipboard.writeText(finalCopy);
+        showToast("Headline copied", "📰");
         confettiBurst(60);
       }catch{
         showToast("Copy blocked. Screenshot works too", "🌸");
       }
     });
 
-    kissBtn.addEventListener("click", () => {
-      confettiBurst(80);
-      showToast("Mwah", "😘");
-      sparkle(document.getElementById("card"));
-    });
-
-    // Sparkle effect
+    // Sparkles
     function sparkle(target){
       const r = target.getBoundingClientRect();
       for (let i=0; i<12; i++){
